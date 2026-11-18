@@ -16,7 +16,7 @@ init()
 # ─── CONFIG ───
 TG_USER = "@Fatbusinessman"
 TG_CHAN = "https://t.me/ChkLeak"
-CREDIT_LINE = f"{TG_USER} | {TG_CHAN}"
+CREDIT_LINE = "| @evilmarkhors | https://t.me/+IGM63Xe1A-43ZTdk"
 
 OUTLOOK_CLIENT_ID = "9199bf20-a13f-4107-85dc-02114787ef48"
 OUTLOOK_REDIRECT = "https://outlook.live.com/mail/"
